@@ -2,7 +2,7 @@
 
 A free, installable budgeting app for phones. Set a monthly max for each spending category, scan receipts, track what you earn and spend, and save toward goals between biweekly paychecks.
 
-**Open the app:** https://chaitalipatil2002.github.io/SavePayTracker/
+**Open the app:** https://chaitalipatil06.github.io/SavePayTracker/
 
 ## Features
 
