@@ -238,7 +238,7 @@ function catOptions(sel) { return cats().map(c => `<option value="${c.id}" ${c.i
 function openTxSheet(tx) {
   const editing = !!tx; let type = tx?.type || "expense"; let fromReceipt = !!tx?.fromReceipt;
   openSheet(editing ? "Edit transaction" : "Add transaction", `
-    ${!editing ? `<label class="scan" id="scanBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M8 9h8M8 12h8M8 15h5"/></svg><span class="grow"><b>Scan a receipt</b><br><span class="muted small">Take or pick a photo. The total, store and category fill in for you to check.</span></span><input type="file" id="rcpt" accept="image/*"></label>
+    ${!editing ? `<div class="scan" id="scanBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M8 9h8M8 12h8M8 15h5"/></svg><div class="grow stack" style="gap:10px"><span><b>Scan a receipt</b><br><span class="muted small">The total, store and category fill in for you to check.</span></span><div class="grid2 scan-btns"><label class="btn btn-primary file-btn" for="rcptCam"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:6px"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Take photo<input type="file" id="rcptCam" accept="image/*" capture="environment"></label><label class="btn file-btn" for="rcpt">Gallery<input type="file" id="rcpt" accept="image/*"></label></div></div></div>
     <div id="scanMsg" hidden></div><div class="progress" id="scanProg" hidden><i></i></div>` : ""}
     <div class="seg" role="group" aria-label="Type"><button type="button" data-type="expense" aria-pressed="${type === "expense"}">Expense</button><button type="button" data-type="income" aria-pressed="${type === "income"}">Income</button></div>
     <div class="grid2">
@@ -253,7 +253,7 @@ function openTxSheet(tx) {
     const setType = v => { type = v; f.querySelectorAll("[data-type]").forEach(b => b.setAttribute("aria-pressed", b.dataset.type === v)); $("#catField", f).hidden = v === "income"; };
     setType(type);
     f.querySelectorAll("[data-type]").forEach(b => b.onclick = () => setType(b.dataset.type));
-    $("#rcpt", f)?.addEventListener("change", e => scanReceipt(e.target.files[0], f, () => { fromReceipt = true; setType("expense"); }));
+    ["#rcpt", "#rcptCam"].forEach(id => $(id, f)?.addEventListener("change", e => { scanReceipt(e.target.files[0], f, () => { fromReceipt = true; setType("expense"); }); e.target.value = ""; }));
     const del = $("#txDel", f); if (del) twoTap(del, () => mutate(d => { d.txs = d.txs.filter(x => x.id !== tx.id); }, "Deleted").then(() => sheet.close()));
     $("#txMer", f).addEventListener("change", e => { if (!editing) { const g = guessCategory(e.target.value); if (g) $("#txCat", f).value = g; } });
     f.onsubmit = async e => {

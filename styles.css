@@ -149,8 +149,7 @@ dialog { border: 0; padding: 0; background: var(--surface); color: var(--ink); w
 dialog::backdrop { background: rgba(15,16,30,.45); }
 .sheet { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
 .sheet-h { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.scan { border: 2px dashed var(--line); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; background: var(--surface-2); }
-.scan:hover { border-color: var(--accent); }
+.scan { border: 2px dashed var(--line); border-radius: 14px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; background: var(--surface-2); }
 .scan svg { width: 30px; height: 30px; color: var(--accent); flex: none; }
 .scan input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 
@@ -185,3 +184,9 @@ img { max-width: 100%; }
 .file-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .progress { height: 6px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
 .progress > i { display: block; height: 100%; background: var(--accent); width: 0; }
+.scan-btns { grid-template-columns: 1fr 1fr; }
+.scan-btns .btn { font-size: .92rem; padding-inline: 10px; }
+@media (max-width: 360px) { .scan-btns { grid-template-columns: 1fr; } }
+.scan-btns .btn { white-space: nowrap; }
+.scan-btns .btn:not(.btn-primary) { background: var(--surface); color: var(--accent); box-shadow: var(--shadow); }
+.scan .scan-btns svg { width: 18px; height: 18px; color: currentColor; flex: none; }
