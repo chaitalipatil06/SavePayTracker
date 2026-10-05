@@ -43,4 +43,4 @@ python3 -m http.server 8000
 
 ## Publishing to the Play Store later
 
-When you're ready to pay Google's one-time $25 developer fee, this app can be wrapped as an Android app with [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) or [PWABuilder](https://www.pwabuilder.com/) without rewriting it.
+When I'm ready to pay Google's one-time $25 developer fee, this app can be wrapped as an Android app with [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) or [PWABuilder](https://www.pwabuilder.com/) without rewriting it.
